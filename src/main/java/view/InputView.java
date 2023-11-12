@@ -2,7 +2,6 @@ package view;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.*;
-import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -21,24 +20,27 @@ public class InputView {
     }
     // ...
 
-    public HashMap<String, Integer> readMenu() {
+    public Map<String, Integer> readMenu() {
         System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
 
         String input = Console.readLine();
 
-        return null;
+        return convertMap(menuOrderSplit(input));
     }
 
-    public List<String> menuOrderSplit(String menuOrder) {
+    private List<String> menuOrderSplit(String menuOrder) {
         List<String> menuOrderList = new ArrayList<>(List.of(menuOrder.split(",")));
+
+        //예외처리
 
         return menuOrderList;
     }
 
-    public Map<String, Integer> convertMap(List<String> menuOrderList) {
+    private Map<String, Integer> convertMap(List<String> menuOrderList) {
         Map<String, Integer> menuOrderMap = menuOrderList.stream()
                 .map(menuAndAmount -> menuAndAmount.split("-"))
                 .collect(Collectors.toMap(parts -> parts[0], parts -> Integer.parseInt(parts[1])));
+        //예외처리
 
         return menuOrderMap;
     }
