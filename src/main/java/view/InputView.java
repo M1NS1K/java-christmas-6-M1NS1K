@@ -1,7 +1,9 @@
 package view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.*;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -27,5 +29,9 @@ public class InputView {
         return null;
     }
 
+    public List<String> menuOrderSplit(String menuOrder) {
+        List<String> menuOrderList = new ArrayList<>(List.of(menuOrder.split(",")));
 
+        return menuOrderList;
+    }
 }
