@@ -34,4 +34,12 @@ public class InputView {
 
         return menuOrderList;
     }
+
+    public Map<String, Integer> convertMap(List<String> menuOrderList) {
+        Map<String, Integer> menuOrderMap = menuOrderList.stream()
+                .map(menuAndAmount -> menuAndAmount.split("-"))
+                .collect(Collectors.toMap(parts -> parts[0], parts -> Integer.parseInt(parts[1])));
+
+        return menuOrderMap;
+    }
 }
