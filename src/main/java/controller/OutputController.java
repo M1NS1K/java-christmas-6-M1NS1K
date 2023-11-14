@@ -8,4 +8,8 @@ public class OutputController {
     public void showOrderMenu() {
         DOMAIN.showMenuOrder();
     }
+
+    public int getTotalOrderAmount() {
+        return DOMAIN.getTotalOrderAmount();
+    }
 }

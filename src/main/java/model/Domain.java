@@ -28,6 +28,15 @@ public class Domain {
         }
     }
 
+    private void setTotalOrderAmount() {
+        totalOrderAmount = Menu.getTotalPrice(menuOrder);
+    }
+
+    public int getTotalOrderAmount() {
+        setTotalOrderAmount();
+        return totalOrderAmount;
+    }
+
     private Domain() {}
 
     private class SINGLETON {

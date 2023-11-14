@@ -1,5 +1,8 @@
 package model;
 
+import java.util.Collection;
+import java.util.Map;
+
 public enum Menu {
     MUSHROOM_SOUP(6000, "양송이수프"),
     TAPAS(5500, "타파스"),
@@ -37,5 +40,23 @@ public enum Menu {
             }
         }
         return false;
+    }
+
+    public static int getTotalPrice(Map<String, Integer> orderMenu) {
+        int sumPrice = 0;
+        for(String menuName : orderMenu.keySet()) {
+            sumPrice += getTotal(menuName) * orderMenu.get(menuName);
+            System.out.println(sumPrice + " " + menuName + " " + getTotal(menuName) + " " + orderMenu.get(menuName));
+        }
+        return sumPrice;
+    }
+
+    private static int getTotal(String type) {
+        for(Menu menu : Menu.values()) {
+            if(menu.getType().equals(type)) {
+                return menu.getPrice();
+            }
+        }
+        return 0;
     }
 }
