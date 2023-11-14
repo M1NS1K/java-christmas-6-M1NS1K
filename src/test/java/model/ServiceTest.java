@@ -26,7 +26,7 @@ public class ServiceTest {
     })
     void testContainsWhitespace(String menuOrder) {
         assertThatThrownBy(() -> {
-            Service.getInstance().containsWhitespaceException(menuOrder);
+            Domain.getInstance().setMenuOrder(menuOrder);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

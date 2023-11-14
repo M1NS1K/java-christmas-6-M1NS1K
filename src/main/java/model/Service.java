@@ -43,12 +43,14 @@ public class Service {
                 .collect(Collectors.toMap(parts -> parts[0], parts -> Integer.parseInt(parts[1])));
         //예외처리
         hasDuplicatesCheck(menuOrderMap.keySet());
+        isValidMenuCheck(menuOrderMap.keySet());
 
         return menuOrderMap;
     }
 
     //정규화 형식 검사
-    public void formCheck(List<String> menuOrder) {
+    //0이여도 예외
+    private void formCheck(List<String> menuOrder) {
         Pattern ORDER_PATTERN = Pattern.compile("([가-힣]+)-([1-9][0-9]*)");
 
         for (var menu : menuOrder) {
@@ -74,6 +76,15 @@ public class Service {
         Set<String> uniqueElements = new HashSet<>();
         for (String element : collection) {
             if (!uniqueElements.add(element)) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
+
+    //메뉴 있는지 검사
+    private void isValidMenuCheck(Collection<String> collection) {
+        for(String element : collection) {
+            if(!Menu.isValidType(element)) {
                 throw new IllegalArgumentException();
             }
         }

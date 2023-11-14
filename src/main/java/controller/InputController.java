@@ -1,7 +1,6 @@
 package controller;
 
 import model.Domain;
-import model.Service;
 import view.InputView;
 
 public class InputController {
