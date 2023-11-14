@@ -11,7 +11,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.junit.platform.commons.util.StringUtils;
-import org.mockito.internal.util.StringUtil;
 
 public class Service {
     private Service() {}
@@ -20,13 +19,16 @@ public class Service {
         private final static Service INStANCE = new Service();
     }
 
-    public void containsWhitespaceException(String menuOrder) {
+    //공백 검사
+    private void containsWhitespaceException(String menuOrder) {
         if(StringUtils.containsWhitespace(menuOrder)) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
-    private List<String> makeMenuOrderStringToList(String menuOrder) {
+    public List<String> makeMenuOrderStringToList(String menuOrder) {
+        containsWhitespaceException(menuOrder);
+
         List<String> menuOrderList = new ArrayList<>(List.of(menuOrder.split(",")));
 
         //예외처리

@@ -7,4 +7,5 @@ public class InputController {
     private final Service SERVICE = Service.getInstance();
     private final InputView INPUT = new InputView();
 
+
 }
