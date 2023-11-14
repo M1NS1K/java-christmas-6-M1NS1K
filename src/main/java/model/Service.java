@@ -28,12 +28,13 @@ public class Service {
         return menuOrderList;
     }
 
-    public void makeMenuOrderListToMap(List<String> menuOrderList) {
+    public Map makeMenuOrderListToMap(List<String> menuOrderList) {
         Map<String, Integer> menuOrderMap = menuOrderList.stream()
                 .map(menuAndAmount -> menuAndAmount.split("-"))
                 .collect(Collectors.toMap(parts -> parts[0], parts -> Integer.parseInt(parts[1])));
         //예외처리
 
+        return menuOrderMap;
     }
 
     public static Service getInstance() {
