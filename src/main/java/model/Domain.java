@@ -12,6 +12,7 @@ public class Domain {
     private int totalBenefitAmount;
     private int amountAfterDiscount;
     private String eventBadge;
+    private boolean eventActive = false;
 
     public void setMenuOrder(String menuOrder) {
         this.menuOrder = SERVICE.makeMenuOrderListToMap(
@@ -30,12 +31,32 @@ public class Domain {
 
     private void setTotalOrderAmount() {
         totalOrderAmount = Menu.getTotalPrice(menuOrder);
+        setEventActive();
     }
 
     public int getTotalOrderAmount() {
         setTotalOrderAmount();
         return totalOrderAmount;
     }
+
+    private void setEventActive() {
+        if(totalOrderAmount >= 10000) {
+            eventActive = true;
+        }
+    }
+
+    private void setBenefitHistory() {
+        benefitHistory.put("크리스마스 디데이 할인", setChristmasSale());
+    }
+
+    private int setChristmasSale() {
+        if(appointmentDate < 26) {
+            int christmasSale = 1000 + 100 * (appointmentDate - 1);
+            return christmasSale;
+        }
+        return 0;
+    }
+
 
     private Domain() {}
 

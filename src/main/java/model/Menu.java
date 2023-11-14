@@ -4,24 +4,26 @@ import java.util.Collection;
 import java.util.Map;
 
 public enum Menu {
-    MUSHROOM_SOUP(6000, "양송이수프"),
-    TAPAS(5500, "타파스"),
-    CAESAR_SALAD(8000, "시저샐러드"),
-    T_BONE_STEAK(55000, "티본스테이크"),
-    BARBECUE_RIBS(54000, "바비큐립"),
-    SEAFOOD_PASTA(35000, "해산물파스타"),
-    CHRISTMAS_PASTA(25000, "크리스마스파스타"),
-    CHOCOLATE_CAKE (15000, "초코케이크"),
-    ICE_CREAM (5000, "아이스크림"),
-    ZERO_COLA(3000, "제로콜라"),
-    RED_WINE(60000, "레드와인"),
-    CHAMPAGNE(25000, "샴페인");
+    MUSHROOM_SOUP(6000, "양송이수프", "appetizer"),
+    TAPAS(5500, "타파스", "appetizer"),
+    CAESAR_SALAD(8000, "시저샐러드", "appetizer"),
+    T_BONE_STEAK(55000, "티본스테이크", "main"),
+    BARBECUE_RIBS(54000, "바비큐립", "main"),
+    SEAFOOD_PASTA(35000, "해산물파스타", "main"),
+    CHRISTMAS_PASTA(25000, "크리스마스파스타", "main"),
+    CHOCOLATE_CAKE (15000, "초코케이크", "dessert"),
+    ICE_CREAM (5000, "아이스크림", "dessert"),
+    ZERO_COLA(3000, "제로콜라", "drink"),
+    RED_WINE(60000, "레드와인", "drink"),
+    CHAMPAGNE(25000, "샴페인", "drink");
 
     private final int PRICE;
+    private final String NAME;
     private final String TYPE;
 
-    Menu(int price, String type) {
+    Menu(int price, String name, String type) {
         this.PRICE = price;
+        this.NAME = name;
         this.TYPE = type;
     }
 
@@ -29,13 +31,17 @@ public enum Menu {
         return PRICE;
     }
 
+    public String getName() {
+        return NAME;
+    }
+
     public String getType() {
         return TYPE;
     }
 
-    public static boolean isValidType(String type) {
+    public static boolean isValidName(String name) {
         for (Menu menu : Menu.values()) {
-            if (menu.getType().equals(type)) {
+            if (menu.getType().equals(name)) {
                 return true;
             }
         }
@@ -46,7 +52,6 @@ public enum Menu {
         int sumPrice = 0;
         for(String menuName : orderMenu.keySet()) {
             sumPrice += getTotal(menuName) * orderMenu.get(menuName);
-            System.out.println(sumPrice + " " + menuName + " " + getTotal(menuName) + " " + orderMenu.get(menuName));
         }
         return sumPrice;
     }

@@ -18,18 +18,12 @@ public class OutputView {
 
         int totalOrderAmount = outputController.getTotalOrderAmount();
 
-        System.out.println(totalOrderAmount);
-        System.out.println(printMoneyExpression(totalOrderAmount));
-
+        System.out.println(outputController.getMoneyExpression(totalOrderAmount));
     }
 
     public void printAmountAfterDiscount() {
         System.out.println("<할인 후 예상 결제 금액>");
     }
 
-    private String printMoneyExpression(int totalOrderAmount) {
-        DecimalFormat decimalFormat = new DecimalFormat("#,###원");
 
-        return decimalFormat.format(totalOrderAmount);
-    }
 }
