@@ -1,9 +1,14 @@
 package model;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.junit.platform.commons.util.StringUtils;
 import org.mockito.internal.util.StringUtil;
@@ -21,10 +26,12 @@ public class Service {
         }
     }
 
-    public List<String> makeMenuOrderStringToList(String menuOrder) {
+    private List<String> makeMenuOrderStringToList(String menuOrder) {
         List<String> menuOrderList = new ArrayList<>(List.of(menuOrder.split(",")));
 
         //예외처리
+        formCheck(menuOrderList);
+
         return menuOrderList;
     }
 
@@ -33,8 +40,41 @@ public class Service {
                 .map(menuAndAmount -> menuAndAmount.split("-"))
                 .collect(Collectors.toMap(parts -> parts[0], parts -> Integer.parseInt(parts[1])));
         //예외처리
+        hasDuplicatesCheck(menuOrderMap.keySet());
 
         return menuOrderMap;
+    }
+
+    //정규화 형식 검사
+    public void formCheck(List<String> menuOrder) {
+        Pattern ORDER_PATTERN = Pattern.compile("([가-힣]+)-([1-9][0-9]*)");
+
+        for (var menu : menuOrder) {
+            if (!ORDER_PATTERN.matcher(menu).matches() || countHyphen(menu) != 1) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
+
+    //'-' 개수 검사
+    private int countHyphen(String str) {
+        int count = 0;
+        for (char c : str.toCharArray()) {
+            if (c == '-') {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    //중복 검사
+    private void hasDuplicatesCheck(Collection<String> collection) {
+        Set<String> uniqueElements = new HashSet<>();
+        for (String element : collection) {
+            if (!uniqueElements.add(element)) {
+                throw new IllegalArgumentException();
+            }
+        }
     }
 
     public static Service getInstance() {
