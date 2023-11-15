@@ -22,23 +22,8 @@ public class Domain {
     }
 
     public void setDate(String date) {
-//        if(!isNumeric(date)){
-//            System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
-//        }
-
         int appointmentDate = Integer.parseInt(date);
         this.appointmentDate = appointmentDate;
-    }
-
-
-
-    private boolean isNumeric(String date) {
-        try {
-            Integer.parseInt(date);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 
     public void showMenuOrder() {
