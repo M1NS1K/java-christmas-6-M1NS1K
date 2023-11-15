@@ -1,7 +1,6 @@
 package view;
 
 import controller.OutputController;
-import java.text.DecimalFormat;
 
 public class OutputView {
     private final OutputController outputController = new OutputController();
@@ -19,6 +18,21 @@ public class OutputView {
         int totalOrderAmount = outputController.getTotalOrderAmount();
 
         System.out.println(outputController.getMoneyExpression(totalOrderAmount));
+        System.out.println();
+    }
+
+    public void printGiftMenu() {
+        System.out.println("<증정 메뉴>");
+
+        if(outputController.getIsGiftMenu()) {
+            System.out.println("샴페인 1개");
+        }
+
+        if(!outputController.getIsGiftMenu()) {
+            System.out.println("없음");
+        }
+
+        System.out.println();
     }
 
     public void printAmountAfterDiscount() {
@@ -27,6 +41,7 @@ public class OutputView {
         int amountAfterDiscount = outputController.getAmountAfterDiscount();
 
         System.out.println(outputController.getMoneyExpression(amountAfterDiscount));
+        System.out.println();
     }
 
 

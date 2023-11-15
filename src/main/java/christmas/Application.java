@@ -14,7 +14,10 @@ public class Application {
         inputController.setDate();
         inputController.setMenuOrder();
 
+        Domain.getInstance().setting();
         outputView.printMenu();
         outputView.printTotalOrderAmount();
+        outputView.printAmountAfterDiscount();
+        outputView.printGiftMenu();
     }
 }

@@ -41,7 +41,7 @@ public enum Menu {
 
     public static boolean isValidName(String name) {
         for (Menu menu : Menu.values()) {
-            if (menu.getType().equals(name)) {
+            if (menu.getName().equals(name)) {
                 return true;
             }
         }

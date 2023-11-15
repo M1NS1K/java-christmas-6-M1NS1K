@@ -14,6 +14,10 @@ public class OutputController {
         return DOMAIN.getTotalOrderAmount();
     }
 
+    public boolean getIsGiftMenu() {
+        return DOMAIN.getIsGiftMenu();
+    }
+
     public int getAmountAfterDiscount() {
         return DOMAIN.getAmountAfterDiscount();
     }

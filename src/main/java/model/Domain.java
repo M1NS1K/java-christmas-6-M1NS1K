@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Domain {
@@ -48,6 +49,7 @@ public class Domain {
     }
 
     public void setBenefitHistory() {
+        benefitHistory = new HashMap<>();
         benefitHistory.put("크리스마스 디데이 할인", setChristmasSale());
         benefitHistory.put("평일 할인", setWeekSale());
         benefitHistory.put("주말 할인", setWeekendSale());
@@ -106,6 +108,10 @@ public class Domain {
         if(totalOrderAmount >= 120000) {
             isGiftMenu = true;
         }
+    }
+
+    public boolean getIsGiftMenu() {
+        return isGiftMenu;
     }
 
     private int setChristmasSale() {
