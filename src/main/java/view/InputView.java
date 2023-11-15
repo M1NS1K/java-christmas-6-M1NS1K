@@ -1,6 +1,8 @@
 package view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Map;
+import model.Menu;
 import model.Service;
 
 public class InputView {
@@ -62,8 +64,28 @@ public class InputView {
         while (true) {
             try {
                 input = Console.readLine();
-                Service.getInstance().makeMenuOrderListToMap(
+                Map<String, Integer> tmp = Service.getInstance().makeMenuOrderListToMap(
                         Service.getInstance().makeMenuOrderStringToList(input));
+                boolean checkSum = true;
+
+                for (String key : tmp.keySet()) {
+                    if(tmp.get(key) > 20) {
+                        throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                    }
+
+                    for(Menu menu : Menu.values()) {
+                        if(menu.getName().equals(key)) {
+                            if(menu.getType() != "drink") {
+                                checkSum = false;
+                            }
+                        }
+                    }
+                }
+
+                if(checkSum) {
+                    throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                }
+
                 break; // 잘못된 값이 입력되지 않았으면 반복문 탈출
             } catch (NumberFormatException e) {
                 System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
