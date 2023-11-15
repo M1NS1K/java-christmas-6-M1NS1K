@@ -84,7 +84,7 @@ public class Service {
     //메뉴 있는지 검사
     private void isValidMenuCheck(Collection<String> collection) {
         for(String element : collection) {
-            if(!Menu.isValidType(element)) {
+            if(!Menu.isValidName(element)) {
                 throw new IllegalArgumentException();
             }
         }

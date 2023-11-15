@@ -51,17 +51,50 @@ public enum Menu {
     public static int getTotalPrice(Map<String, Integer> orderMenu) {
         int sumPrice = 0;
         for(String menuName : orderMenu.keySet()) {
-            sumPrice += getTotal(menuName) * orderMenu.get(menuName);
+            sumPrice += findMenuPrice(menuName) * orderMenu.get(menuName);
         }
         return sumPrice;
     }
 
-    private static int getTotal(String type) {
-        for(Menu menu : Menu.values()) {
-            if(menu.getType().equals(type)) {
-                return menu.getPrice();
+    private static int findMenuPrice(String name) {
+        if(compareName(name) != null) {
+            return compareName(name).getPrice();
+        }
+
+        return 0;
+//        for(Menu menu : Menu.values()) {
+//            if(menu.getName().equals(name)) {
+//                return menu.getPrice();
+//            }
+//        }
+//        return 0;
+    }
+
+    public static int getIsValidDessertSale(Map<String, Integer> orderMenu) {
+        for(String name : orderMenu.keySet()) {
+            if(compareName(name).getType() == "dessert") {
+                return orderMenu.get(name) * 2023;
             }
         }
         return 0;
     }
+
+    public static int getIsValidMainSale(Map<String, Integer> orderMenu) {
+        for(String name : orderMenu.keySet()) {
+            if(compareName(name).getType() == "main") {
+               return orderMenu.get(name) * 2023;
+            }
+        }
+        return 0;
+    }
+
+    private static Menu compareName(String name) {
+        for(Menu menu : Menu.values()) {
+            if(menu.getName().equals(name)) {
+                return menu;
+            }
+        }
+        return null;
+    }
+
 }
