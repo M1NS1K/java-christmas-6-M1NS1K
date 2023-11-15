@@ -6,7 +6,6 @@ public class Domain {
     private final Service SERVICE = Service.getInstance();
     private final int[] SPECIAL_DAY = {3, 10, 17, 24, 25, 31};
     private Map<String, Integer> menuOrder;
-    private Map<String, Integer> giftMenu;
     private Map<String, Integer> benefitHistory;
     private int appointmentDate;
     private int totalOrderAmount;
@@ -14,6 +13,7 @@ public class Domain {
     private int amountAfterDiscount;
     private String eventBadge;
     private boolean eventActive = false;
+    private boolean isGiftMenu = false;
 
     public void setMenuOrder(String menuOrder) {
         this.menuOrder = SERVICE.makeMenuOrderListToMap(
@@ -33,6 +33,7 @@ public class Domain {
     private void setTotalOrderAmount() {
         totalOrderAmount = Menu.getTotalPrice(menuOrder);
         setEventActive();
+        setGiftMenu();
     }
 
     public int getTotalOrderAmount() {
@@ -53,6 +54,7 @@ public class Domain {
         benefitHistory.put("특별 할인", setSpecialSale());
         setTotalBenefitAmount();
         setAmountAfterDiscount();
+        setEventBadge();
     }
 
     public void setTotalBenefitAmount() {
@@ -60,7 +62,12 @@ public class Domain {
         for(int sale : benefitHistory.values()) {
             totalSale += sale;
         }
+
         totalBenefitAmount = totalSale;
+
+        if(isGiftMenu) {
+            totalBenefitAmount += 25000;
+        }
     }
 
     public void setAmountAfterDiscount() {
@@ -68,7 +75,21 @@ public class Domain {
     }
 
     public void setEventBadge() {
+        eventBadge = "없음";
 
+        if(totalBenefitAmount >= 20000) {
+            eventBadge = "신타";
+        } else if(totalBenefitAmount >= 10000) {
+            eventBadge = "트리";
+        } else if(totalBenefitAmount >= 5000) {
+            eventBadge = "별";
+        }
+    }
+
+    private void setGiftMenu() {
+        if(totalOrderAmount >= 120000) {
+            isGiftMenu = true;
+        }
     }
 
     private int setChristmasSale() {
@@ -102,6 +123,11 @@ public class Domain {
             }
         }
         return 0;
+    }
+
+    public void setting() {
+        setTotalOrderAmount();
+        setBenefitHistory();
     }
 
     private Domain() {
