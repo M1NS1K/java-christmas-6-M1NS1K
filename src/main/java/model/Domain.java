@@ -57,6 +57,10 @@ public class Domain {
         setEventBadge();
     }
 
+    public Map<String, Integer> getBenefitHistory() {
+        return benefitHistory;
+    }
+
     public void setTotalBenefitAmount() {
         int totalSale = 0;
         for(int sale : benefitHistory.values()) {
@@ -70,11 +74,19 @@ public class Domain {
         }
     }
 
-    public void setAmountAfterDiscount() {
+    public int getTotalBenefitAmount() {
+        return totalBenefitAmount;
+    }
+
+    private void setAmountAfterDiscount() {
         amountAfterDiscount = totalOrderAmount - totalBenefitAmount;
     }
 
-    public void setEventBadge() {
+    public int getAmountAfterDiscount() {
+        return amountAfterDiscount;
+    }
+
+    private void setEventBadge() {
         eventBadge = "없음";
 
         if(totalBenefitAmount >= 20000) {
@@ -84,6 +96,10 @@ public class Domain {
         } else if(totalBenefitAmount >= 5000) {
             eventBadge = "별";
         }
+    }
+
+    public String getEventBadge() {
+        return eventBadge;
     }
 
     private void setGiftMenu() {

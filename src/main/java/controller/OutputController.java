@@ -14,6 +14,10 @@ public class OutputController {
         return DOMAIN.getTotalOrderAmount();
     }
 
+    public int getAmountAfterDiscount() {
+        return DOMAIN.get
+    }
+
     public String getMoneyExpression(int totalOrderAmount) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###원");
 
