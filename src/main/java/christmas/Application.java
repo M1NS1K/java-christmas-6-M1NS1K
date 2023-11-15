@@ -17,7 +17,10 @@ public class Application {
         Domain.getInstance().setting();
         outputView.printMenu();
         outputView.printTotalOrderAmount();
-        outputView.printAmountAfterDiscount();
         outputView.printGiftMenu();
+        outputView.printBenefitHistory();
+        outputView.printTotalBenefitAmount();
+        outputView.printAmountAfterDiscount();
+        outputView.printEventBadge();
     }
 }

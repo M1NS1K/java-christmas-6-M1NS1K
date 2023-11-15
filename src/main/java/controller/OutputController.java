@@ -1,6 +1,7 @@
 package controller;
 
 import java.text.DecimalFormat;
+import java.util.Map;
 import model.Domain;
 
 public class OutputController {
@@ -18,8 +19,20 @@ public class OutputController {
         return DOMAIN.getIsGiftMenu();
     }
 
+    public Map<String, Integer> getBenefitHistory() {
+        return DOMAIN.getBenefitHistory();
+    }
+
+    public int getTotalBenefitAmount() {
+        return DOMAIN.getTotalBenefitAmount();
+    }
+
     public int getAmountAfterDiscount() {
         return DOMAIN.getAmountAfterDiscount();
+    }
+
+    public String getEventBadge() {
+        return DOMAIN.getEventBadge();
     }
 
     public String getMoneyExpression(int totalOrderAmount) {

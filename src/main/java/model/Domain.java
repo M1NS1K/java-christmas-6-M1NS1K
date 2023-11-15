@@ -57,6 +57,10 @@ public class Domain {
         setTotalBenefitAmount();
         setAmountAfterDiscount();
         setEventBadge();
+
+        if(isGiftMenu) {
+            benefitHistory.put("증정 이벤트", 25000);
+        }
     }
 
     public Map<String, Integer> getBenefitHistory() {
@@ -81,7 +85,13 @@ public class Domain {
     }
 
     private void setAmountAfterDiscount() {
-        amountAfterDiscount = totalOrderAmount - totalBenefitAmount;
+        if(isGiftMenu) {
+            amountAfterDiscount = totalOrderAmount - totalBenefitAmount + 25000;
+        }
+
+        if(!isGiftMenu) {
+            amountAfterDiscount = totalOrderAmount - totalBenefitAmount;
+        }
     }
 
     public int getAmountAfterDiscount() {
@@ -92,7 +102,7 @@ public class Domain {
         eventBadge = "없음";
 
         if(totalBenefitAmount >= 20000) {
-            eventBadge = "신타";
+            eventBadge = "산타";
         } else if(totalBenefitAmount >= 10000) {
             eventBadge = "트리";
         } else if(totalBenefitAmount >= 5000) {
@@ -122,18 +132,18 @@ public class Domain {
         return 0;
     }
 
-    private int setWeekSale() {
+    private int setWeekendSale() {
         if(appointmentDate % 7 == 1 || appointmentDate % 7 == 2) {
-            return Menu.getIsValidDessertSale(menuOrder);
+            return Menu.getIsValidMainSale(menuOrder);
         }
         return 0;
     }
 
-    private int setWeekendSale() {
+    private int setWeekSale() {
         if (appointmentDate % 7 == 0 || appointmentDate % 7 == 3
                 || appointmentDate % 7 == 4 || appointmentDate % 7 == 5
                 || appointmentDate % 7 == 6) {
-            return Menu.getIsValidMainSale(menuOrder);
+            return Menu.getIsValidDessertSale(menuOrder);
         }
         return 0;
     }
