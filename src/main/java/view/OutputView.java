@@ -24,7 +24,9 @@ public class OutputView {
     public void printAmountAfterDiscount() {
         System.out.println("<할인 후 예상 결제 금액>");
 
+        int amountAfterDiscount = outputController.getAmountAfterDiscount();
 
+        System.out.println(outputController.getMoneyExpression(amountAfterDiscount));
     }
 
 

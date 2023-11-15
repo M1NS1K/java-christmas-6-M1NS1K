@@ -15,7 +15,7 @@ public class OutputController {
     }
 
     public int getAmountAfterDiscount() {
-        return DOMAIN.get
+        return DOMAIN.getAmountAfterDiscount();
     }
 
     public String getMoneyExpression(int totalOrderAmount) {
