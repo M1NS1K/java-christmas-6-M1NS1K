@@ -1,7 +1,5 @@
 package model;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -55,7 +53,7 @@ public class Service {
 
         for (var menu : menuOrder) {
             if (!ORDER_PATTERN.matcher(menu).matches() || countHyphen(menu) != 1) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
     }
@@ -76,7 +74,7 @@ public class Service {
         Set<String> uniqueElements = new HashSet<>();
         for (String element : collection) {
             if (!uniqueElements.add(element)) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
     }
@@ -85,7 +83,7 @@ public class Service {
     private void isValidMenuCheck(Collection<String> collection) {
         for(String element : collection) {
             if(!Menu.isValidName(element)) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
     }
