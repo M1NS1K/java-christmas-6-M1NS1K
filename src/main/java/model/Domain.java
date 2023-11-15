@@ -22,20 +22,15 @@ public class Domain {
     }
 
     public void setDate(String date) {
-        if(!isNumeric(date)){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
-        }
+//        if(!isNumeric(date)){
+//            System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+//        }
 
         int appointmentDate = Integer.parseInt(date);
-        dateScopeException(appointmentDate);
         this.appointmentDate = appointmentDate;
     }
 
-    private void dateScopeException(int date) {
-        if(date < 1 || date > 31) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
-        }
-    }
+
 
     private boolean isNumeric(String date) {
         try {
